@@ -4,10 +4,12 @@ const User = require('../models/users');
 
  const signup = (req, res)=>{
     const { name, email, password } = req.body;
+    console.log(req.body);
     const saltRounds = 10;
     bcrypt.genSalt(saltRounds, function(err, salt) {
         bcrypt.hash(password, salt, function(err, hash) {
             // Store hash in your password DB.
+            console.log(hash);
             if(err){
                 console.log('Unable to create new user')
                 res.json({message: 'Unable to create new user'})
@@ -28,6 +30,7 @@ function generateAccessToken(id) {
 
 const login = (req, res) => {
     const { email, password } = req.body;
+    console.log(req.body);
     console.log(password);
     User.findAll({ where : { email }}).then(user => {
         if(user.length > 0){
@@ -39,6 +42,7 @@ const login = (req, res) => {
                 if (response){
                     console.log(JSON.stringify(user))
                     const jwttoken = generateAccessToken(user[0].id);
+                    // console.log(generateAccessToken(user[0].id));
                     res.json({token: jwttoken, success: true, message: 'Successfully Logged In'})
                 // Send JWT
                 } else {

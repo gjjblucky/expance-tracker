@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize')
+const {Sequelize} = require('sequelize')
 
 // const pool = mysql.createPool({
 //     host: 'localhost',
