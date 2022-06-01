@@ -2,6 +2,15 @@ const path = require('path');
 
 const express = require('express');
 var cors = require('cors')
+
+const app = express();
+const dotenv = require('dotenv');
+
+
+// get config vars
+dotenv.config();
+
+
 const sequelize = require('./util/database');
 const User = require('./models/users');
 const Expense = require('./models/expenses');
@@ -14,12 +23,7 @@ const purchaseRoutes = require('./routes/purchase')
 const resetPasswordRoutes = require('./routes/resetpassword')
 
 
-const app = express();
-const dotenv = require('dotenv');
 
-
-// get config vars
-dotenv.config();
 
 
 app.use(cors());
@@ -43,7 +47,7 @@ User.hasMany(Forgotpassword);
 Forgotpassword.belongsTo(User);
 
 
-sequelize.sync({force:true})
+sequelize.sync()
     .then(() => {
         app.listen(5000);
     })

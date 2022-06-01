@@ -7,9 +7,9 @@ const {Sequelize} = require('sequelize')
 //     password: 'apple@17'
 // });
 
-const sequelize = new Sequelize('expensetracker', 'root', 'K@ngriya007',{
+const sequelize = new Sequelize(process.env.DB_NAME,process.env.DB_USERNAME , process.env.DB_PASSWORD,{
     dialect: 'mysql',
-    host: 'localhost'
+    host: process.env.DB_HOST
 })
 
 module.exports = sequelize;
